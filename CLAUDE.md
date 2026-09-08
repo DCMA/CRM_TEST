@@ -10,9 +10,9 @@ CRM 系統,供內部業務團隊使用。
 ## 常用指令
 
 ```bash
-# build:
-# test:
-# lint:
+# build: npm run build
+# test:  npm run test
+# lint:  npm run lint
 ```
 
 ## 架構要點
