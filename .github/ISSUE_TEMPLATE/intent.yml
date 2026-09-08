@@ -1,0 +1,54 @@
+name: Intent(需求意圖)
+description: 所有工作的唯一入口。用你自己的話描述問題與期望結果,不需要寫技術方案。
+labels: ["aidlc"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        不確定怎麼填?在 Claude Code 裡跑 `/aidlc:capture-intent`,
+        它會訪談式問完這幾題、產生 intent 檔案並自動開票。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 問題 / 背景
+      description: 現在是誰、在什麼情境下遇到什麼問題?多久發生一次、代價是什麼?
+      placeholder: 例:經銷商下單後看不到 SAP 的即時庫存,客服每天要人工查 30+ 次。
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: 期望結果
+      description: 做完之後,什麼會變得不一樣?怎麼判斷成功?
+      placeholder: 例:下單頁面顯示即時庫存;客服人工查詢次數降到每天 5 次以下。
+    validations:
+      required: true
+  - type: textarea
+    id: affected
+    attributes:
+      label: 影響的使用者與系統
+      description: 哪些角色會用到?碰到哪些系統(SAP / ERP / 金流…)?沒有就寫「無」。
+      placeholder: 例:經銷商、客服;SAP(唯讀 API)、Dealer Portal。
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: 限制條件
+      description: 期限、預算、不能動的系統、必須配合的單位。沒有就留空。
+      placeholder: 例:SAP 介面只有唯讀權限;需在 Q4 結帳前上線。
+  - type: textarea
+    id: open_questions
+    attributes:
+      label: 開放問題
+      description: 還沒決定、或需要別人拍板的事。不知道答案就寫在這裡,不要猜——Spec Review 之前要釐清。
+      placeholder: 例:庫存要即時查 SAP 還是可以接受 15 分鐘快取?(需 PO 決定)
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 優先級
+      options:
+        - P0(緊急)
+        - P1(重要)
+        - P2(一般)
+      default: 2
