@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { listCompanies } from "@/app/companies/actions";
+import { listCompanies, softDeleteCompany } from "@/app/companies/actions";
 
 // Always reflects the latest data — this list changes on every create/
 // update/delete, so it must not be statically prerendered at build time.
@@ -32,6 +32,12 @@ export default async function CompaniesPage() {
                 <td>{company.taxId}</td>
                 <td>
                   <Link href={`/companies/${company.id}/edit`}>編輯</Link>
+                </td>
+                <td>
+                  <form action={softDeleteCompany}>
+                    <input type="hidden" name="id" value={company.id} />
+                    <button type="submit">刪除</button>
+                  </form>
                 </td>
               </tr>
             ))}

@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { isValidTaxId } from "@/lib/validation/taxId";
 
@@ -80,4 +81,15 @@ export async function updateCompany(
 
   await prisma.company.update({ where: { id }, data: { name, taxId } });
   redirect("/companies");
+}
+
+export async function softDeleteCompany(formData: FormData) {
+  const id = String(formData.get("id") ?? "");
+  if (!id) return;
+
+  await prisma.company.update({
+    where: { id },
+    data: { deletedAt: new Date() },
+  });
+  revalidatePath("/companies");
 }
