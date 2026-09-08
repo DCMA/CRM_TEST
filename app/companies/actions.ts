@@ -49,3 +49,10 @@ export async function createCompany(
   await prisma.company.create({ data: { name, taxId } });
   redirect("/companies");
 }
+
+export async function listCompanies() {
+  return prisma.company.findMany({
+    where: { deletedAt: null },
+    orderBy: { createdAt: "desc" },
+  });
+}
