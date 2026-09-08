@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Company {
+  id        String    @id @default(cuid())
+  name      String
+  // Not @unique at the DB level: spec AC3 only requires the tax ID to be
+  // unique among non-deleted rows, so a soft-deleted company's tax ID must
+  // stay reusable. Uniqueness against non-deleted rows is enforced in
+  // app/companies/actions.ts instead.
+  taxId     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@index([deletedAt])
+  @@index([taxId])
+}
