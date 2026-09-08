@@ -19,7 +19,7 @@ GATE_UAT="human"
 # Under "any" the author's yes is a 👍 on the merge request comment on the
 # ticket, because GitHub does not let an author approve their own PR. The agent
 # account never counts either way.
-MERGE_APPROVER="distinct"
+MERGE_APPROVER="any"
 
 # Continue to the next stage without waiting for a command, up to the next
 # human gate. Gates are unchanged either way — this only saves the typing.
